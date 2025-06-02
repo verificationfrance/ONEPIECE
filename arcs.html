@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Les Arcs de One Piece - L'Aventure Continue !</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+    <style>
+        /* STYLE GÉNÉRAL ET MODERNITÉ (Identique à index.html) */
+        :root {
+            --color-primary: #E53935; /* Rouge vif pour les accents */
+            --color-secondary: #FFC107; /* Un jaune orangé pour des éléments secondaires */
+            --color-dark: #121212; /* Noir très profond pour le fond */
+            --color-medium-dark: #212121; /* Gris foncé pour les cartes ou sections */
+            --color-light-text: #E0E0E0; /* Gris clair pour le texte sur fond sombre */
+            --color-lighter-text: #BDBDBD; /* Gris plus clair pour les textes secondaires */
+            --color-accent: #64B5F6; /* Un bleu froid pour l'interactivité */
+
+            --font-heading: 'Poppins', sans-serif;
+            --font-body: 'Roboto', sans-serif;
+        }
+
+        body {
+            font-family: var(--font-body);
+            margin: 0;
+            padding: 0;
+            background-color: var(--color-dark);
+            color: var(--color-light-text);
+            line-height: 1.6;
+        }
+
+        a {
+            text-decoration: none;
+            color: var(--color-primary);
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: var(--color-accent);
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-heading);
+            color: var(--color-light-text);
+            margin-bottom: 0.5em;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* EN-TÊTE ET NAVIGATION (Adapté pour toutes les pages) */
+        header {
+            background-color: var(--color-medium-dark);
+            color: var(--color-light-text);
+            padding: 20px 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+            position: sticky; /* Pour que le header reste visible en haut */
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .logo h1 {
+            margin: 0;
+            font-size: 2em;
+        }
+
+        .logo a {
+            color: var(--color-light-text);
+            font-weight: 700;
+        }
+
+        .nav-links {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        .nav-links li {
+            margin-left: 30px;
+        }
+
+        .nav-links a {
+            color: var(--color-lighter-text);
+            font-weight: 400;
+            padding: 5px 0;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--color-primary);
+            transition: width 0.3s ease-out;
+        }
+
+        .nav-links a:hover::after,
+        .nav-links a.active::after { /* Style pour le lien actif */
+            width: 100%;
+        }
+        .nav-links a.active {
+            color: var(--color-primary); /* Couleur du lien actif */
+        }
+
+
+        /* PIED DE PAGE (Identique à index.html) */
+        footer {
+            background-color: var(--color-dark);
+            color: var(--color-lighter-text);
+            text-align: center;
+            padding: 30px 20px;
+            font-size: 0.9em;
+            border-top: 1px solid var(--color-medium-dark);
+        }
+
+        .social-links a {
+            color: var(--color-lighter-text);
+            margin: 0 10px;
+            font-size: 1.1em;
+        }
+
+        .social-links a:hover {
+            color: var(--color-primary);
+        }
+
+        /* STYLES SPÉCIFIQUES POUR LA PAGE DES ARCS */
+        .page-title-section { /* Section pour le titre principal de la page */
+            padding: 40px 20px;
+            text-align: center;
+            background-color: var(--color-dark); /* Peut être différent si besoin */
+        }
+
+        .page-title-section h2 {
+            font-size: 3em;
+            color: var(--color-primary);
+            margin-bottom: 10px;
+        }
+
+        .page-title-section .section-intro {
+            color: var(--color-lighter-text);
+            max-width: 800px;
+            margin: 0 auto 30px auto;
+            font-size: 1.1em;
+        }
+
+        .arc-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 35px; /* Augmentation du gap pour plus d'espace */
+            padding: 20px 0; /* Ajout de padding vertical */
+        }
+
+        .arc-card {
+            background-color: var(--color-medium-dark);
+            border-radius: 10px; /* Coins plus arrondis */
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.6); /* Ombre plus prononcée */
+            transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
+            overflow: hidden; /* Pour que l'image ne dépasse pas des coins arrondis */
+            display: flex;
+            flex-direction: column; /* Pour bien aligner contenu */
+        }
+
+        .arc-card:hover {
+            transform: translateY(-8px) scale(1.02); /* Effet de surélévation et léger zoom */
+            box-shadow: 0 10px 25px rgba(var(--color-primary-rgb, 229, 57, 53), 0.4); /* Ombre colorée au survol */
+        }
+
+        .arc-card img {
+            width: 100%;
+            height: 200px; /* Hauteur d'image augmentée */
+            object-fit: cover;
+            /* border-bottom: 4px solid var(--color-primary); Retiré pour un look plus intégré */
+        }
+        
+        .arc-card-content {
+            padding: 20px;
+            text-align: left;
+            flex-grow: 1; /* Pour que le contenu prenne l'espace disponible */
+            display: flex;
+            flex-direction: column;
+        }
+
+        .arc-card-content h4 {
+            color: var(--color-light-text);
+            font-size: 1.7em; /* Taille ajustée */
+            margin-bottom: 10px;
+        }
+
+        .arc-card-content p {
+            color: var(--color-lighter-text);
+            font-size: 0.95em; /* Taille ajustée */
+            line-height: 1.7; /* Interligne augmenté */
+            margin-bottom: 15px;
+            flex-grow: 1; /* Pour que le paragraphe pousse le bouton vers le bas */
+        }
+        
+        .btn-secondary {
+            display: inline-block;
+            background-color: transparent;
+            color: var(--color-accent);
+            padding: 10px 18px;
+            border-radius: 5px;
+            font-weight: 600;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border: 2px solid var(--color-accent);
+            align-self: flex-start; /* Aligner le bouton à gauche */
+            margin-top: auto; /* Pousse le bouton en bas de la carte */
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--color-accent);
+            color: var(--color-dark);
+        }
+         /* Pour utiliser var(--color-primary-rgb) */
+        :root {
+            --color-primary-rgb: 229, 57, 53; /* Valeurs RGB de #E53935 */
+        }
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <nav>
+            <div class="logo">
+                <h1><a href="index.html">One Piece</a></h1>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="personnages.html">Personnages</a></li>
+                <li><a href="arcs.html" class="active">Arcs</a></li> <li><a href="actualites.html">Actualités</a></li>
+                <li><a href="theories.html">Théories</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="page-title-section">
+            <div class="container">
+                <h2>Les Arcs Narratifs de One Piece</h2>
+                <p class="section-intro">Explorez les différentes sagas et arcs qui composent l'aventure épique de One Piece, des débuts modestes à East Blue aux confrontations titanesques dans le Nouveau Monde.</p>
+            </div>
+        </section>
+
+        <section class="arcs-content-section">
+            <div class="container">
+                <div class="arc-grid">
+                    <article class="arc-card">
+                        <img src="https://placehold.co/400x200/E53935/FFFFFF?text=Arc+East+Blue" alt="Arc East Blue">
+                        <div class="arc-card-content">
+                            <h4>Saga East Blue</h4>
+                            <p>Les débuts de Luffy et la formation de son équipage. Introduction des premiers membres : Zoro, Nami, Usopp et Sanji. Affrontements contre Baggy, Kuro, Don Krieg et Arlong.</p>
+                            </div>
+                    </article>
+
+                    <article class="arc-card">
+                        <img src="https://placehold.co/400x200/FFC107/121212?text=Arc+Alabasta" alt="Arc Alabasta">
+                        <div class="arc-card-content">
+                            <h4>Saga Alabasta</h4>
+                            <p>L'équipage du Chapeau de Paille aide la princesse Vivi à sauver son royaume, Alabasta, des griffes du redoutable Shichibukai, Crocodile, et de son organisation Baroque Works.</p>
+                            </div>
+                    </article>
+
+                    <article class="arc-card">
+                        <img src="https://placehold.co/400x200/64B5F6/FFFFFF?text=Arc+Enies+Lobby" alt="Arc Enies Lobby">
+                        <div class="arc-card-content">
+                            <h4>Saga Water 7 / Enies Lobby</h4>
+                            <p>Conflits internes, la perte du Going Merry et la déclaration de guerre au Gouvernement Mondial pour sauver Nico Robin. Introduction de Franky et combats mémorables contre le CP9.</p>
+                            </div>
+                    </article>
+
+                    <article class="arc-card">
+                        <img src="https://placehold.co/400x200/4CAF50/FFFFFF?text=Arc+Marineford" alt="Arc Marineford">
+                        <div class="arc-card-content">
+                            <h4>Saga Guerre au Sommet (Marineford)</h4>
+                            <p>Luffy tente de sauver son frère Portgas D. Ace de l'exécution à Marineford, déclenchant une guerre massive impliquant les forces de la Marine, les Shichibukai et les pirates de Barbe Blanche.</p>
+                            </div>
+                    </article>
+
+                     <article class="arc-card">
+                        <img src="https://placehold.co/400x200/9C27B0/FFFFFF?text=Arc+Dressrosa" alt="Arc Dressrosa">
+                        <div class="arc-card-content">
+                            <h4>Saga Dressrosa</h4>
+                            <p>L'alliance avec Trafalgar Law pour faire tomber le Shichibukai Donquixote Doflamingo, tyran de Dressrosa. Révélations sur les Fruits du Démon artificiels et formation de la Grande Flotte du Chapeau de Paille.</p>
+                            </div>
+                    </article>
+
+                     <article class="arc-card">
+                        <img src="https://placehold.co/400x200/F44336/FFFFFF?text=Arc+Pays+des+Wa" alt="Arc Pays des Wa">
+                        <div class="arc-card-content">
+                            <h4>Saga Pays des Wa (Wano)</h4>
+                            <p>L'équipage et leurs alliés affrontent les Empereurs Kaido et Big Mom pour libérer le pays de Wano. Combats épiques, nouvelles transformations et révélations sur le passé.</p>
+                            </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 One Piece Fan Site. Tous droits réservés aux ayants droit respectifs.</p>
+        <div class="social-links">
+            <a href="#">Facebook</a>
+            <a href="#">Twitter</a>
+            <a href="#">Instagram</a>
+        </div>
+    </footer>
+
+    </body>
+</html>
